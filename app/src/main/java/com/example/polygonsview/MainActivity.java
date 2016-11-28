@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             //对角线是否开启
             case R.id.btn_centerLine_enable:
-                polygonsView.setCenterLineEnable(centerLineEnable);
+                polygonsView.setDiagonalsLineEnable(centerLineEnable);
                 centerLineEnable = !centerLineEnable;
                 break;
             //增加顶点

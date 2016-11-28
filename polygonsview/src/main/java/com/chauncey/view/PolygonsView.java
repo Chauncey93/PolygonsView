@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Random;
 
 
-
 public class PolygonsView extends View {
     private int defalutSize = 200;
     private int width, height;
@@ -21,7 +20,7 @@ public class PolygonsView extends View {
     private Paint mDiagonalsLinePaint;
     private int mVertex = 5;
     private List<Paint> mPolygonPaintList;
-    private boolean mCenterLineEnable;
+    private boolean mDiagonalsLineEnable;
     private int mCount = 3;
     private boolean mProgressLineEnable;
     private Paint mProgressLinePaint;
@@ -34,7 +33,7 @@ public class PolygonsView extends View {
         super(context, attrs);
 
         mPolygonPaintList = new ArrayList<>(mVertex);
-        mCenterLineEnable = true;
+        mDiagonalsLineEnable = true;
         mProgressLineEnable = true;
         defalutSize = dp2px(defalutSize);
         mDiagonalsLinePaint = new Paint();
@@ -83,6 +82,7 @@ public class PolygonsView extends View {
         invalidate();
     }
 
+
     public int getDiagonalsLineColor() {
         return mDiagonalsLinePaint.getColor();
     }
@@ -96,6 +96,7 @@ public class PolygonsView extends View {
         invalidate();
 
     }
+
 
     public float getProgressLineWidth() {
         return mProgressLinePaint.getStrokeWidth();
@@ -111,6 +112,8 @@ public class PolygonsView extends View {
         mProgressLinePaint.setColor(color);
         invalidate();
     }
+
+
 
     public int getProgressLineColor() {
         return mProgressLinePaint.getColor();
@@ -288,16 +291,16 @@ public class PolygonsView extends View {
     }
 
 
-    public void setCenterLineEnable(boolean b) {
-        if (mCenterLineEnable == b) {
+    public void setDiagonalsLineEnable(boolean b) {
+        if (mDiagonalsLineEnable == b) {
             return;
         }
-        mCenterLineEnable = b;
+        mDiagonalsLineEnable = b;
         invalidate();
     }
 
-    public boolean getCenterLineEnable() {
-        return mCenterLineEnable;
+    public boolean getDiagonalsLineEnable() {
+        return mDiagonalsLineEnable;
     }
 
     @Override
@@ -323,15 +326,15 @@ public class PolygonsView extends View {
 
         onDrawEdges(canvas, mCenter, mCount);
         onDrawProgressLine(canvas);
-        onDrawCenterLine(canvas);
+        onDrawDiagonalsLine(canvas);
 
         onDrawText(canvas);
         super.onDraw(canvas);
     }
 
 
-    private void onDrawCenterLine(Canvas canvas) {
-        if (!mCenterLineEnable) {
+    private void onDrawDiagonalsLine(Canvas canvas) {
+        if (!mDiagonalsLineEnable) {
             return;
         }
         canvas.save();
@@ -346,14 +349,14 @@ public class PolygonsView extends View {
     }
 
 
-    private void onDrawEdges(Canvas canvas, float edgeLength, int count) {
+    private void onDrawEdges(Canvas canvas, float diagonalLineLength, int count) {
         float degree = getDegree();
 
         Path path = new Path();
 
-        path.moveTo(mCenter, mCenter - (float) 0.75 * edgeLength);
+        path.moveTo(mCenter, mCenter - (float) 0.75 * diagonalLineLength);
         for (int i = 1; i < mVertex; i++) {
-            path.lineTo((float) (mCenter + 0.75 * edgeLength * Math.sin(Math.toRadians(degree * (i)))), (float) (mCenter - 0.75 * edgeLength * Math.cos(Math.toRadians(degree * (i)))));
+            path.lineTo((float) (mCenter + 0.75 * diagonalLineLength * Math.sin(Math.toRadians(degree * (i)))), (float) (mCenter - 0.75 * diagonalLineLength * Math.cos(Math.toRadians(degree * (i)))));
         }
         path.close();
         canvas.drawPath(path, mPolygonPaintList.get(mCount - count));
@@ -375,9 +378,7 @@ public class PolygonsView extends View {
         Path path = new Path();
 
         path.moveTo(mCenter, mCenter - (float) (0.75 * mProgressLinePercent.get(0)) * mCenter);
-//        for (int i = 0; i < mVertex; i++) {
-//            path.lineTo((float) (mCenter + (0.75 * 0.5) * mCenter * Math.sin(Math.toRadians(degree * (i + 1)))), (float) (mCenter - (0.75 * 0.5) * mCenter * Math.cos(Math.toRadians(degree * (i + 1)))));
-//        }
+
         for (int i = 1; i < mVertex; i++) {
             path.lineTo((float) (mCenter + (0.75 * mProgressLinePercent.get(i)) * mCenter * Math.sin(Math.toRadians(degree * (i)))), (float) (mCenter - (0.75 * mProgressLinePercent.get(i)) * mCenter * Math.cos(Math.toRadians(degree * (i)))));
         }
@@ -402,7 +403,6 @@ public class PolygonsView extends View {
 
 
     private float getDegree() {
-
 
         if (mVertex == 7) {
             return (float) (360 / mVertex + 0.5);
