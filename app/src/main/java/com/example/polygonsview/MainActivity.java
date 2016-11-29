@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 polygonsView.setVertexs(vertex + 1);
                 tvvertex.setText(vertex + 1 + "");
                 vertexTextAdapter.addData(vertex);
+                progressAdapter.addData(vertex);
                 rvvertex.scrollToPosition(vertex);
                 break;
             //减少顶点
@@ -146,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 polygonsView.setVertexs(vertex - 1);
                 tvvertex.setText(vertex - 1 + "");
                 vertexTextAdapter.removeData(vertex);
+                progressAdapter.removeData(vertex);
                 break;
             //增加多边形个数
             case R.id.btn_count_add:
