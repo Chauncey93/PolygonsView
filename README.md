@@ -3,7 +3,7 @@
 
 ## 一、前言
 
-看了这篇[仿掌上英雄联盟能力值分析效果](http://blog.csdn.net/as7210636/article/details/52692102)受到了一些启发，觉得该文对于雷达图的绘制写得非常详细。但同时又感觉该雷达图的灵活性偏低，于是打算自己封装一个，于是就有了这个PolygonsView。废话不多说，先上几张图。
+看了这篇[仿掌上英雄联盟能力值分析效果](http://blog.csdn.net/as7210636/article/details/52692102)受到了一些启发，觉得该文对于雷达图的绘制写得非常详细。但同时又感觉该雷达图的灵活性偏低，于是打算自己封装一个，于是就有了这个PolygonsView。废话不多说，先上几张图。
 <img src="http://img.blog.csdn.net/20161130103128709" width="270" height="480"/> <img src="http://img.blog.csdn.net/20161130104135964" width="270" height="480"/> <img src="http://img.blog.csdn.net/20161130104313621" width="270" height="480"/> 
 <img src="http://img.blog.csdn.net/20161130104429908" width="270" height="480"/>
 ####**使用方式**
